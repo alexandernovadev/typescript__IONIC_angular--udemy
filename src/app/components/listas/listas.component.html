@@ -1,0 +1,31 @@
+
+  <ion-list color="dark" class="animated zoomIn" >
+
+    <!-- Ojo con ese filtro, ese completado lo recibe del padre "aap-listas" -->
+    <ion-item-sliding *ngFor="let lista of deseoservice.listas | filtroCompletado: completada" 
+                      #slidingItem>
+  
+      <!-- detail : pone la fechita de "ir a" >    a cada elemento de la lista -->
+      <ion-item color="dark" detail>
+        <!-- Vamos a poner como un Bagde de bootstr4, pero aqui se llama ionnote -->
+        <ion-label (click)="listaSelecionada(lista)">{{lista.titulo}}</ion-label>
+        <ion-note color="success" slot="end">{{lista.item.length}} Items</ion-note>
+      </ion-item>
+
+      <ion-item-options side="start">
+          <ion-item-option (click)="editarLista( lista )"
+                          color="tertiary">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+    
+        <ion-item-options side="end">
+            <ion-item-option (click)="borrarLista( lista )"
+                             color="danger">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+  </ion-item-sliding>
+
+  </ion-list>
+

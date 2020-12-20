@@ -1,0 +1,51 @@
+<ion-header no-border>
+  <ion-toolbar color="dark" >
+
+    <ion-buttons class="animated flipInX" slot="start">
+      <ion-back-button  color="success" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="animated flipInX">{{lista.titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <!-- Es mejor colocar el input dentro de una Ionlist ya que
+  si hay artos input, en ionlist me deja hacer scroll -->
+  <ion-list color="dark" class="animated flipInX">
+      <ion-item color="dark">
+          <ion-label position="floating">Agregar Nueva Tarea...</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreItem" (keyup.enter)="agregarItem()"></ion-input>
+        </ion-item>
+  </ion-list>
+
+
+  <ion-list class="animated flipInX">
+
+    <ion-header color="dark" no-border *ngIf="lista.item.length > 0">
+      <ion-label class="ion-padding">Tareas por Hacer</ion-label>
+    </ion-header>
+
+    <!-- Casi se me olvida el index, qui borra con pos, es mejor con ID, pero SEPUEDE ,
+    Let i , siempre hay que ponerle el tipo de variable-->
+    <ion-item-sliding *ngFor="let item of lista.item;let i= index" class="animated fadeInDown ">
+
+      <ion-item color="dark">
+        <!-- Ioncheck tiene un evecto de estado de cambio true|false -->
+        <ion-checkbox slot="start" color="success" [(ngModel)]="item.completado"
+                    (ionChange)="cambioCheck(item)"></ion-checkbox>
+        <ion-label>{{item.desc}}</ion-label>
+      </ion-item>
+
+      <!-- Esta es la opcion que me aparece al deslizar -->
+      <ion-item-options side="end">
+          <ion-item-option (click)="borrar( i )" color="danger">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>
